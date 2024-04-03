@@ -1,154 +1,69 @@
-const { User, Chat, Message, Mailbox } = require('./models');
+// Controller.js
+
+const { UserModel, ChatModel, MessageModel } = require('./models');
 
 // UserController
-const UserController = {
-    createUser: async (req, res) => {
-        try {
-            const user = new User(req.body);
-            await user.save();
-            res.status(201).json(user);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function createUser(data) {
+    return await UserModel.create(data);
+}
 
-    getUser: async (req, res) => {
-        try {
-            const user = await User.findById(req.params.id);
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.json(user);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
+async function getUserById(id) {
+    return await UserModel.findById(id);
+}
 
-    updateUser: async (req, res) => {
-        try {
-            const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.json(user);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function updateUserById(id, data) {
+    return await UserModel.findByIdAndUpdate(id, data, { new: true });
+}
 
-    deleteUser: async (req, res) => {
-        try {
-            const user = await User.findByIdAndDelete(req.params.id);
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
-            }
-            res.json({ message: 'User deleted' });
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    }
-};
+async function deleteUserById(id) {
+    await UserModel.findByIdAndDelete(id);
+}
 
 // ChatController
-const ChatController = {
-    createChat: async (req, res) => {
-        try {
-            const chat = new Chat(req.body);
-            await chat.save();
-            res.status(201).json(chat);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function createChat(data) {
+    return await ChatModel.create(data);
+}
 
-    getChat: async (req, res) => {
-        try {
-            const chat = await Chat.findById(req.params.id);
-            if (!chat) {
-                return res.status(404).json({ message: 'Chat not found' });
-            }
-            res.json(chat);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
+async function getChatById(id) {
+    return await ChatModel.findById(id);
+}
 
-    updateChat: async (req, res) => {
-        try {
-            const chat = await Chat.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            if (!chat) {
-                return res.status(404).json({ message: 'Chat not found' });
-            }
-            res.json(chat);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function updateChatById(id, data) {
+    return await ChatModel.findByIdAndUpdate(id, data, { new: true });
+}
 
-    deleteChat: async (req, res) => {
-        try {
-            const chat = await Chat.findByIdAndDelete(req.params.id);
-            if (!chat) {
-                return res.status(404).json({ message: 'Chat not found' });
-            }
-            res.json({ message: 'Chat deleted' });
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    }
-};
+async function deleteChatById(id) {
+    await ChatModel.findByIdAndDelete(id);
+}
 
 // MessageController
-const MessageController = {
-    createMessage: async (req, res) => {
-        try {
-            const message = new Message(req.body);
-            await message.save();
-            res.status(201).json(message);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function createMessage(data) {
+    return await MessageModel.create(data);
+}
 
-    getMessage: async (req, res) => {
-        try {
-            const message = await Message.findById(req.params.id);
-            if (!message) {
-                return res.status(404).json({ message: 'Message not found' });
-            }
-            res.json(message);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
+async function getMessageById(id) {
+    return await MessageModel.findById(id);
+}
 
-    updateMessage: async (req, res) => {
-        try {
-            const message = await Message.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            if (!message) {
-                return res.status(404).json({ message: 'Message not found' });
-            }
-            res.json(message);
-        } catch (err) {
-            res.status(400).json({ message: err.message });
-        }
-    },
+async function updateMessageById(id, data) {
+    return await MessageModel.findByIdAndUpdate(id, data, { new: true });
+}
 
-    deleteMessage: async (req, res) => {
-        try {
-            const message = await Message.findByIdAndDelete(req.params.id);
-            if (!message) {
-                return res.status(404).json({ message: 'Message not found' });
-            }
-            res.json({ message: 'Message deleted' });
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    }
-};
+async function deleteMessageById(id) {
+    await MessageModel.findByIdAndDelete(id);
+}
 
 module.exports = {
-    UserController,
-    ChatController,
-    MessageController
+    createUser,
+    getUserById,
+    updateUserById,
+    deleteUserById,
+    createChat,
+    getChatById,
+    updateChatById,
+    deleteChatById,
+    createMessage,
+    getMessageById,
+    updateMessageById,
+    deleteMessageById
 };

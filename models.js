@@ -1,3 +1,5 @@
+// models.js
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -15,11 +17,26 @@ const userSchema = new Schema({
             default: false,
             type: Boolean,
         },
-        inbox: Boolean,
-        outgoing: Boolean,
-        favorite: Boolean,
-        draft: Boolean,
-        deleted: Boolean,
+        inbox: {
+            default: false,
+            type: Boolean,
+        },
+        outgoing: {
+            default: false,
+            type: Boolean,
+        },
+        favorite: {
+            default: false,
+            type: Boolean,
+        },
+        draft: {
+            default: false,
+            type: Boolean,
+        },
+        deleted: {
+            default: false,
+            type: Boolean,
+        },
         tags: [String]
     }]
 });
@@ -62,13 +79,12 @@ const messageSchema = new Schema({
 
 
 // Create models
-const User = mongoose.model('User', userSchema);
-const Chat = mongoose.model('Chat', chatSchema);
-const Message = mongoose.model('Message', messageSchema);
+const UserModel = mongoose.model('Users', userSchema);
+const ChatModel = mongoose.model('Chats', chatSchema);
+const MessageModel = mongoose.model('Messages', messageSchema);
 
 module.exports = {
-    User,
-    Chat,
-    Message,
-    
+    UserModel,
+    ChatModel,
+    MessageModel,  
 };
