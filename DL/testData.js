@@ -11,7 +11,7 @@ const {
     getMessageById,
     updateMessageById,
     deleteMessageById
-} = require('./controller')
+} = require('../controller')
 
 
 
